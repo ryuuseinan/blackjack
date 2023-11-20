@@ -25,6 +25,6 @@
 
 # Ejecutar app
 + Windows: 
-`python .\app\app.py`
+`python .\app.py`
 + Linux: 
-`python ./app/app.py`
+`python ./app.py`
