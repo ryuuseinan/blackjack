@@ -25,7 +25,7 @@
         <div class="container">
           <div class="columns">
             <!-- Contenedor izquierdo (Historial del player) -->
-            <div class="column is-one-third box">
+            <div class="column is-one-third box" style="background-color: #0000007A; color: #fff; ">
               <h2>Historial del Player</h2>
               {% if historial_player %}
                 <ul>
@@ -39,22 +39,19 @@
             </div>
 
             <!-- Contenedor medio (Formulario para ingresar cartas) -->
-            <div class="column is-one-third box">
+            <div class="column is-one-third box" style="margin-left: 1%; margin-right: 1%;">
               <form action="/predict" method="post">
-                <label for="firstplayercard">Seleccionar primera carta del player:</label>
+                <label for="firstplayercard">Selecciona la primera y segunda carta del player:</label>
                 <select name="firstplayercard" required>
                   {% for cartas in cartas %}
                     <option value="{{ cartas[1] }}">{{ cartas[1] }}</option>
                   {% endfor %}
                 </select>
-
-                <label for="secondplayercard">Seleccionar segunda carta del player:</label>
                 <select name="secondplayercard" required>
                   {% for cartas in cartas %}
                     <option value="{{ cartas[1] }}">{{ cartas[1] }}</option>
                   {% endfor %}
-                </select>
-
+                </select> 
                 <label for="dealer_card">Seleccionar carta del dealer:</label>
                 <select name="dealer_card" required>
                   {% for cartas in cartas %}
@@ -66,7 +63,7 @@
             </div>
 
             <!-- Contenedor derecho (Historial del dealer) -->
-            <div class="column is-one-third box">
+            <div class="column is-one-third box" style="background-color: #0000007A; color: #fff">
               <h2>Historial del dealer</h2>
               {% if historial_dealer %}
                 <ul>
