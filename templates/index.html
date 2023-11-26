@@ -1,84 +1,91 @@
 <!DOCTYPE html>
 <html>
   {% include 'head.html' %}
-  <header>
+<header>
     <div class="hero is-black">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">
-            Blackjack Predictor
-          </h1>
-          <h2 class="subtitle">
-            Predice el resultado de una mano de blackjack
-          </h2>
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Blackjack Predictor
+                </h1>
+                <h2 class="subtitle">
+                    Predice el resultado de una mano de blackjack
+                </h2>
+            </div>
         </div>
-      </div>
     </div>
-  </header>
-  <body style="margin: 0; padding: 0; height: 100%; overflow: hidden;">
+</header>
+<body style="margin: 0; padding: 0; height: 100%; overflow: hidden;">
     <div style="background-image: url('/static/img/bg.jpg');
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: center center;
                 height: 100vh;">
-      <section class="section">
-        <div class="container">
-          <div class="columns">
-            <!-- Contenedor izquierdo (Historial del player) -->
-            <div class="column is-one-third box" style="background-color: #0000007A; color: #fff; ">
-              <h2>Historial del Player</h2>
-              {% if historial_player %}
-                <ul>
-                  {% for carta in historial_player %}
-                    <li>N° {{ carta[0] }}, Cartas {{ carta[1] }} & {{ carta[2] }}</li>
-                  {% endfor %}
-                </ul>
-              {% else %}
-                <p>No hay historial disponible</p>
-              {% endif %}
-            </div>
+        <section class="section">
+            <div class="container">
+                <div class="columns">
+                    <!-- Contenedor izquierdo (Historial del player) -->
+                    <div class="column is-one-third box" style="background-color: #0000007A; color: #fff; ">
+                        <h2>Historial del Player</h2>
+                        {% if historial_player %}
+                        <ul>
+                            {% for carta in historial_player %}
+                            <li>N° {{ carta[0] }}, Cartas {{ carta[1] }} & {{ carta[2] }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>No hay historial disponible</p>
+                        {% endif %}
+                    </div>
 
-            <!-- Contenedor medio (Formulario para ingresar cartas) -->
-            <div class="column is-one-third box" style="margin-left: 1%; margin-right: 1%;">
-              <form action="/predict" method="post">
-                <label for="firstplayercard">Selecciona la primera y segunda carta del player:</label>
-                <select name="firstplayercard" required>
-                  {% for cartas in cartas %}
-                    <option value="{{ cartas[1] }}">{{ cartas[1] }}</option>
-                  {% endfor %}
-                </select>
-                <select name="secondplayercard" required>
-                  {% for cartas in cartas %}
-                    <option value="{{ cartas[1] }}">{{ cartas[1] }}</option>
-                  {% endfor %}
-                </select> 
-                <label for="dealer_card">Seleccionar carta del dealer:</label>
-                <select name="dealer_card" required>
-                  {% for cartas in cartas %}
-                    <option value="{{ cartas[1] }}">{{ cartas[1] }}</option>
-                  {% endfor %}
-                </select>
-                <button class="button is-primary login-button" type="submit">Guardar</button>
-              </form>
-            </div>
+                    <!-- Contenedor medio (Formulario para ingresar cartas) -->
+                    <div class="column is-one-third box" style="margin-left: 1%; margin-right: 1%;">
+                        <form action="/predict" method="post">
+                            <label for="firstplayercard">Selecciona la primera y segunda carta del player:</label>
+                            <select name="firstplayercard" required>
+                                {% for cartas in cartas %}
+                                <option value="{{ cartas[1] }}">{{ cartas[1] }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="secondplayercard" required>
+                                {% for cartas in cartas %}
+                                <option value="{{ cartas[1] }}">{{ cartas[1] }}</option>
+                                {% endfor %}
+                            </select>
+                            <label for="dealer_card">Seleccionar carta del dealer:</label>
+                            <select name="dealer_card" required>
+                                {% for cartas in cartas %}
+                                <option value="{{ cartas[1] }}">{{ cartas[1] }}</option>
+                                {% endfor %}
+                            </select>
+                            <button class="button is-primary login-button" type="submit">Guardar</button>
+                        </form>
 
-            <!-- Contenedor derecho (Historial del dealer) -->
-            <div class="column is-one-third box" style="background-color: #0000007A; color: #fff">
-              <h2>Historial del dealer</h2>
-              {% if historial_dealer %}
-                <ul>
-                  {% for carta in historial_dealer %}
-                    <li>N° {{ carta[0] }}, Carta {{ carta[1] }}</li>
-                  {% endfor %}
-                </ul>
-              {% else %}
-                <p>No hay historial disponible</p>
-              {% endif %}
+                        <!-- Mostrar información adicional -->
+                        {% if puntuacion_player and puntuacion_dealer %}
+                        <p>Puntuación del Player: {{ puntuacion_player }}</p>
+                        <p>Puntuación del Dealer: {{ puntuacion_dealer }}</p>
+                        <p>Siguiente carta adivinada: {{ carta_siguiente }}</p>
+                        <p>Ganador: {{ ganador }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Contenedor derecho (Historial del dealer) -->
+                    <div class="column is-one-third box" style="background-color: #0000007A; color: #fff">
+                        <h2>Historial del dealer</h2>
+                        {% if historial_dealer %}
+                        <ul>
+                            {% for carta in historial_dealer %}
+                            <li>N° {{ carta[0] }}, Carta {{ carta[1] }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>No hay historial disponible</p>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
     </div>
-  </body>
+</body>
 </html>
