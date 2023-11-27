@@ -25,16 +25,29 @@
             <div class="container">
                 <div class="columns">
                     <!-- Contenedor izquierdo (Historial del player) -->
-                    <div class="column is-one-third box" style="background-color: #0000007A; color: #fff; ">
+                    <div class="column is-one-third box" style="background-color: #0000007A; color: #fff">
                         <h2>Historial del Player</h2>
                         {% if historial_player %}
-                        <ul>
-                            {% for carta in historial_player %}
-                            <li>N° {{ carta[0] }}, Cartas {{ carta[1] }} & {{ carta[2] }}</li>
-                            {% endfor %}
-                        </ul>
+                        <table style="border-collapse: collapse; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th style="color: white;">N°</th>
+                                        <th style="color: white;">Carta 1</th>
+                                        <th style="color: white;">Carta 2</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for carta in historial_player %}
+                                        <tr>
+                                            <td>{{ carta[0] }}</td>
+                                            <td>{{ carta[1] }}</td>
+                                            <td>{{ carta[2] }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         {% else %}
-                        <p>No hay historial disponible</p>
+                            <p>No hay historial disponible</p>
                         {% endif %}
                     </div>
 
@@ -72,15 +85,26 @@
 
                     <!-- Contenedor derecho (Historial del dealer) -->
                     <div class="column is-one-third box" style="background-color: #0000007A; color: #fff">
-                        <h2>Historial del dealer</h2>
+                        <h2>Historial del Dealer</h2>
                         {% if historial_dealer %}
-                        <ul>
-                            {% for carta in historial_dealer %}
-                            <li>N° {{ carta[0] }}, Carta {{ carta[1] }}</li>
-                            {% endfor %}
-                        </ul>
+                            <table style="border-collapse: collapse; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th style="color: white;">N°</th>
+                                        <th style="color: white;">Carta</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for carta in historial_dealer %}
+                                        <tr>
+                                            <td>{{ carta[0] }}</td>
+                                            <td>{{ carta[1] }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         {% else %}
-                        <p>No hay historial disponible</p>
+                            <p>No hay historial disponible</p>
                         {% endif %}
                     </div>
                 </div>

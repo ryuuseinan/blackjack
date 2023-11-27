@@ -48,3 +48,6 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
+.table th {
+    color: white;
+}
