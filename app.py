@@ -111,9 +111,23 @@ def predict():
     # Registrar el historial del dealer en la base de datos
     insert_dealer_history(dealer_card)
 
+     # Conectar a la base de datos
+    conn = sqlite3.connect('historial.db')
+    cursor = conn.cursor()
+
+    # Obtener historial del player
+    cursor.execute('SELECT * FROM historial_player')
+    historial_player = cursor.fetchall()
+
+    # Obtener historial del dealer
+    cursor.execute('SELECT * FROM historial_dealer')
+    historial_dealer = cursor.fetchall()
+
+    # Obtener cartas
+    cartas = get_all_cards()
+
     # Redirigir de vuelta al index con información adicional
-    return render_template('index.html', historial_player=[first_player_card, second_player_card],
-                           historial_dealer=[dealer_card], cartas=get_all_cards(),
+    return render_template('index.html', historial_player=historial_player, historial_dealer=historial_dealer, cartas=cartas,
                            puntuacion_player=puntuacion_player, puntuacion_dealer=puntuacion_dealer,
                            carta_siguiente=carta_siguiente, ganador=ganador)
 
