@@ -55,7 +55,14 @@ with open('modelo_entrenado.pkl', 'rb') as file:
     modelo = pickle.load(file)
 
 def predecir_probabilidad(cartas_player, cartas_dealer, carta_siguiente):
-    features = [carta[1] for carta in cartas_player + cartas_dealer + [(0, carta_siguiente)]]
+    # Extraer solo los nombres de las cartas (segundo elemento de cada tupla)
+    features_player = [carta[1] for carta in cartas_player]
+    features_dealer = [carta[1] for carta in cartas_dealer]
+
+    # Combinar las características del jugador, del dealer y la siguiente carta
+    features = [(0, carta) for carta in features_player + features_dealer] + [(0, carta_siguiente)]
+
+    # Hacer una predicción utilizando el modelo
     probabilidad = modelo.predict_proba([features])[0]
     return probabilidad
 
@@ -138,14 +145,24 @@ def predict():
 
 @app.route('/suggestions', methods=['POST'])
 def suggestions():
+    # ... (otro código)
+
     first_player_card = request.form['firstplayercard']
     second_player_card = request.form['secondplayercard']
     dealer_card = request.form['dealer_card']
 
     cartas_player = [first_player_card, second_player_card]
+
+    # Agregar impresiones para verificar el contenido
+    print("cartas_player:", cartas_player)
+
     cartas_dealer = [dealer_card]
 
     carta_siguiente = adivinar_carta_siguiente()
+
+    # Agregar impresiones para verificar el contenido
+    print("cartas_dealer:", cartas_dealer)
+    print("carta_siguiente:", carta_siguiente)
 
     probabilidad = predecir_probabilidad(cartas_player, cartas_dealer, carta_siguiente)
 
