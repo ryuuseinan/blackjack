@@ -9,7 +9,7 @@
                     Blackjack Predictor
                 </h1>
                 <h2 class="subtitle">
-                    Predice el resultado de una mano de blackjack
+                    Predice el resultado de una mano de blackjack</br>
                 </h2>
             </div>
         </div>
@@ -55,7 +55,7 @@
 
                     <!-- Contenedor medio (Formulario para ingresar cartas) -->
                     <div class="column is-one-third box" style="margin-left: 1%; margin-right: 1%;">
-                        <form action="/suggestions" method="post">
+                        <form action="/predict" method="post">
                             <label for="firstplayercard">Selecciona la primera y segunda carta del player:</label>
                             <select name="firstplayercard" required>
                                 {% for cartas in cartas %}
@@ -74,9 +74,6 @@
                                 {% endfor %}
                             </select>
                             <button class="button is-primary login-button" type="submit">Buscar sugerencia</button>
-                        </form>
-                        <form action="/suggestions" method="post">
-                            <button class="button is-primary login-button" type="submit"></button>
                         </form>
                         <!-- Mostrar información adicional -->
                         {% if puntuacion_player and puntuacion_dealer %}
