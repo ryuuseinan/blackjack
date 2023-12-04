@@ -36,14 +36,15 @@ def calcular_puntuacion(cartas):
     return puntuacion
 
 # Función para determinar el ganador del juego
-def determinar_ganador(puntuacion_player, puntuacion_dealer):
-    if puntuacion_player > 21:
-        return "Dealer"
-    elif puntuacion_dealer > 21:
+def determinar_ganador(puntuacion_player, puntuacion_dealer, carta_siguiente):
+    print("carta_siguiente:", carta_siguiente)
+    print("puntuacion_player:", puntuacion_player)
+    print("puntuacion_dealer:", puntuacion_dealer)
+    puntuacion_player = puntuacion_player + carta_siguiente[0]
+    puntuacion_dealer = puntuacion_dealer + carta_siguiente[0]
+    if puntuacion_player == 21:
         return "Player"
-    elif puntuacion_player > puntuacion_dealer:
-        return "Player"
-    elif puntuacion_dealer > puntuacion_player:
+    elif puntuacion_dealer == 21:
         return "Dealer"
     else:
         return "Empate"
@@ -106,7 +107,7 @@ def predict():
 
     carta_siguiente = adivinar_carta_siguiente()
 
-    ganador = determinar_ganador(puntuacion_player, puntuacion_dealer)
+    ganador = determinar_ganador(puntuacion_player, puntuacion_dealer, carta_siguiente)
 
     insert_player_history(first_player_card, second_player_card, puntuacion_player, carta_siguiente, ganador)
 
