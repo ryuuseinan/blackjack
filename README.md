@@ -1,7 +1,6 @@
 # blackjack
 
-# Blackjack
-+ Proyecto para la asignatura de innovación
+# Proyecto para la asignatura de innovación
 `git clone https://github.com/ryuuseinan/blackjack/`
 
 `cd blackjack`
